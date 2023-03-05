@@ -1,0 +1,60 @@
+ brute force - T.C :- O(nxm)(n+m)
+               S.C :- O(1)
+               
+// Traverse through the matrix and if you find an element with value 0, then change all the elements in its row and column to -11, except when an element is 0.
+
+// The reason for not changing other elements to 0, but -11, is because that might affect other columns and rows.
+
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j] == 0){
+
+                    int index = i-1;
+                    while(index >= 0){
+                        if(matrix[index][j] != 0){
+                            matrix[index][j] = -11;
+                        }
+                        index--;
+                    }
+                    index = i+1;
+                    while(index < n){
+                        if(matrix[index][j] != 0){
+                            matrix[index][j] = -11;
+                        }
+                        index++;
+                    }
+                    index = j-1;
+                    while(index >= 0){
+                        if(matrix[i][index] != 0){
+                            matrix[i][index] = -11;
+                        }
+                        index--;
+                    }
+                    index = j+1;
+                    while(index < m){
+                        if(matrix[i][index] != 0){
+                            matrix[i][index] = -11;
+                        }
+                        index++;
+                    }
+                }
+            }
+        }
+
+    // Now traverse through the matrix again and if an element is -11 change it to 0, which will be the answer.
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j] == -11){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}
+               
+
